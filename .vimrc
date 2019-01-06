@@ -239,265 +239,227 @@ map <silent> [Tag]p :tabprevious<CR>
 
 
 
-"====================== Neobundle ===========================
-
-" bundleで管理するディレクトリを指定
-set runtimepath+=~/.vim/bundle/neobundle.vim/
+"====================== dein ===========================
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
 
 " Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
+set runtimepath+=$HOME/.vim/dein/repos/github.com/Shougo/dein.vim
 
-" neobundle自体をneobundleで管理
-NeoBundleFetch 'Shougo/neobundle.vim'
+" Required:
+if dein#load_state('$HOME/.vim/dein')
+  call dein#begin('$HOME/.vim/dein')
 
-"---------NeoBundleで管理するプラグイン達----------
-"カラースキーム
-NeoBundle 'tomasr/molokai'
-"ディレクトリツリーの表示
-NeoBundle 'scrooloose/nerdtree'
-"coffeescriptを認識させる
-NeoBundle 'kchmck/vim-coffee-script'
-" ステータスラインの表示内容強化
-NeoBundle 'itchyny/lightline.vim'
-" 末尾の全角と半角の空白文字を赤くハイライト
-NeoBundle 'bronson/vim-trailing-whitespace'
-"grep機能を使いやすくする
-":Rgrep {word} で検索 [q: 前へ,  ]q: 次へ, :cc N{番号}
-NeoBundle 'vim-scripts/grep.vim'
-"vimのIDE化
-NeoBundle 'Shougo/unite.vim'
-"ディレクトリツリーをタブ開いた瞬間に表示
-" NeoBundle 'jistr/vim-nerdtree-tabs'
-"インデントを可視化
-NeoBundle 'Yggdroot/indentLine'
-"カーソル移動を楽に
-NeoBundle 'easymotion/vim-easymotion'
-"括弧移動を拡張
-NeoBundle 'tmhedberg/matchit'
-"helpの日本語化
-NeoBundle 'vim-jp/vimdoc-ja'
-"「=」入力時に自動的にスペースを確保する
-"NeoBundle 'kana/vim-smartchr'
-"HTML/CSSの作成簡略化 <C-y>, でタグ展開
-NeoBundle 'mattn/emmet-vim'
-"コメントアウト gccでカレント行 gcで選択行
-NeoBundle 'tomtom/tcomment_vim'
-"指定範囲を楽に囲む 選択範囲を、S＋囲むもの
-NeoBundle 'tpope/vim-surround'
-"true/false など、対になるものを:Switchで切り替え
-NeoBundle 'AndrewRadev/switch.vim'
-"日本語の単語移動を分節単位に
-NeoBundle 'deton/gist:5138905'
-if has('lua')
-  " コードの自動補完
-  NeoBundle 'Shougo/neocomplete.vim'
-  " スニペットの補完機能
-  NeoBundle 'Shougo/neosnippet.vim'
-  NeoBundle "Shougo/neosnippet"
-  " スニペット集
-  NeoBundle 'Shougo/neosnippet-snippets'
-endif
-"rubocopの非同期実行
-NeoBundle 'w0rp/ale'
-let g:ale_sign_column_always = 1
-"自動保存
-NeoBundle 'vim-scripts/vim-auto-save'
-let g:auto_save = 1
-let g:auto_save_in_insert_mode = 0
-"保存時に自動でctagsが実行される
-NeoBundle 'soramugi/auto-ctags.vim'
-let g:auto_ctags = 1
-nnoremap <C-h> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
-"tagsジャンプの時に複数ある時は一覧表示
-nnoremap <C-]> g<C-]>
-"GitコマンドをVim上で操作
-"taglist
-NeoBundle 'vim-scripts/taglist.vim'
-let Tlist_Show_One_File = 1
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_Use_Right_Window = 1
-let Tlist_Auto_Update = 1
-let Tlist_File_Fold_Auto_Close = 1
-"開いているファイルのコードを実行して結果を画面分割で出力できる
-NeoBundle 'thinca/vim-quickrun'
-"日時を<C-a>、<C-x>でインクリメント、デクリメントできる
-NeoBundle 'tpope/vim-speeddating'
-"VimでGit操作
-NeoBundle 'lambdalisue/gina.vim'
-"brにGitHubの該当行を開くコマンドをキーマッピング
-vnoremap br :Gina browse :<cr>
+  " Let dein manage dein
+  " Required:
+  call dein#add('$HOME/.vim/dein/repos/github.com/Shougo/dein.vim')
 
-" ファイル検索(fzf)
-set rtp+=/usr/local/opt/fzf
-NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-NeoBundle 'junegunn/fzf.vim'
-nnoremap <C-p> :FZFFileList<CR>
-"ノーマルモードでfを押すとfzfが起動するキーマップ
-nmap f :FZFFileList<CR>
-command! FZFFileList call fzf#run({
-            \ 'source': 'find . -type d -name .git -prune -o ! -name .DS_Store',
-            \ 'sink': 'e'})
-" fzfからファイルにジャンプできるようにする
-let g:fzf_buffers_jump = 1
+  " プラグインを設定
+  " NerdTree
+  call dein#add('scrooloose/nerdtree')
+  " 閉じ括弧補完
+  call dein#add('cohama/lexima.vim')
+  " HTMLなど 閉じタグ自動補完
+  call dein#add('alvan/vim-closetag')
+  " HTML 対応するタグをハイライト
+  call dein#add('valloric/matchtagalways')
+  " コード補完
+  call dein#add('Shougo/neocomplete.vim')
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  " Git関連
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('tpope/vim-fugitive')
 
-"変更行の左端に記号表示
-NeoBundle 'airblade/vim-gitgutter'
-
-"ファイル操作用
-NeoBundle 'Shougo/vimfiler'
-"--------------------------------------------------
-
-
-"--------------EasyMotionの設定-------------------
-map <Leader> <Plug>(easymotion-prefix)
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
-"sを押したら2文字サーチに入るよう設定
-nmap s <Plug>(easymotion-overwin-f2)
-
-"SmartCaseで検索する
-let g:EasyMotion_smartcase = 1
-
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-
-"-------------------------------------------------
-
-
-"---------------NERDTreeの設定---------------------
-" 隠しファイルをデフォルトで表示させる
-let NERDTreeShowHidden = 1
-
-" デフォルトでツリーを表示させる
-let g:nerdtree_tabs_open_on_console_startup=1
-
-"<C-e>でNERDTreeを起動する設定
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
-"-------------------------------------------------
-
-"--------------indent guideの設定-----------------
-set list listchars=tab:\¦\
-let g:indentLine_color_term = 111
-let g:indentLine_color_gui = '#708090'
-"-------------------------------------------------
-
-"-----------------自動補完の設定--------------------
-if neobundle#is_installed('neocomplete.vim')
-  " Vim起動時にneocompleteを有効にする
-  let g:neocomplete#enable_at_startup = 1
-  " smartcase有効化. 大文字が入力されるまで大文字小文字の区別を無視する
-  let g:neocomplete#enable_smart_case = 1
-  " 3文字以上の単語に対して補完を有効にする
-  let g:neocomplete#min_keyword_length = 3
-  " 区切り文字まで補完する
-  let g:neocomplete#enable_auto_delimiter = 1
-  " 1文字目の入力から補完のポップアップを表示
-  let g:neocomplete#auto_completion_start_length = 1
-  " バックスペースで補完のポップアップを閉じる
-  inoremap <expr><BS> neocomplete#smart_close_popup()."<C-h>"
-  " エンターキーで補完候補の確定. スニペットの展開もエンターキーで確定・・・・・・②
-  imap <expr><CR> neosnippet#expandable() ? "<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "<C-y>" : "<CR>"
-  " タブキーで補完候補の選択. スニペット内のジャンプもタブキーでジャンプ・・・・・・③
-  imap <expr><TAB> pumvisible() ? "<C-n>" : neosnippet#jumpable() ? "<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
-  " ハイライトの色設定
-  highlight Pmenu ctermbg=6
-  highlight PmenuSel ctermbg=3
-  highlight PMenuSbar ctermbg=0
+  " Required:
+  call dein#end()
+  call dein#save_state()
 endif
 
-"独自スニペット用のディレクトリ設定
-let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/snippets/'
+" Required:
+filetype plugin indent on
+syntax enable
 
-"snippets展開とplaceholderの移動をC-kに指定
+" インストールされていないものは自動インストールする
+if dein#check_install()
+  call dein#install()
+endif
+
+"----------------------------------------------------------
+"  nerdtree
+"----------------------------------------------------------
+let g:NERDTreeShowBookmarks=1
+" autocmd vimenter * NERDTree
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+nnoremap <C-t> :NERDTreeToggle<CR>
+
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+   exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+    exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+  endfunction
+  call NERDTreeHighlightFile('py',     'yellow',  'none', 'yellow',  '#151515')
+  call NERDTreeHighlightFile('md',     'blue',    'none', '#3366FF', '#151515')
+  call NERDTreeHighlightFile('yml',    'yellow',  'none', 'yellow',  '#151515')
+  call NERDTreeHighlightFile('config', 'yellow',  'none', 'yellow',  '#151515')
+  call NERDTreeHighlightFile('conf',   'yellow',  'none', 'yellow',  '#151515')
+  call NERDTreeHighlightFile('json',   'yellow',  'none', 'yellow',  '#151515')
+  call NERDTreeHighlightFile('html',   'yellow',  'none', 'yellow',  '#151515')
+  call NERDTreeHighlightFile('styl',   'cyan',    'none', 'cyan',    '#151515')
+  call NERDTreeHighlightFile('css',    'cyan',    'none', 'cyan',    '#151515')
+  call NERDTreeHighlightFile('rb',     'Red',     'none', 'red',     '#151515')
+  call NERDTreeHighlightFile('js',     'Red',     'none', '#ffa500', '#151515')
+  call NERDTreeHighlightFile('php',    'Magenta', 'none', '#ff00ff', '#151515')
+
+" ディレクトリ表示記号を変更する
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable  = '▶'
+let g:NERDTreeDirArrowCollapsible = '▼'
+
+
+"----------------------------------------------------------
+"  vim-closetag
+"----------------------------------------------------------
+let g:closetag_filenames = '*.html,*.xhtml,*.php'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+let g:closetag_filetypes = 'html,xhtml,php'
+let g:closetag_xhtml_filetypes = 'xhtml,jsx'
+
+let g:closetag_emptyTags_caseSensitive = 1
+let g:closetag_shortcut = '>'
+let g:closetag_close_shortcut = '<leader>>'
+
+
+"----------------------------------------------------------
+"  matchtagalways
+"----------------------------------------------------------
+"オプション機能ONにする
+let g:mta_use_matchparen_group = 1
+
+"使用するファイルタイプ(phpを追加)
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'jinja' : 1,
+    \ 'php' : 1,
+    \}
+
+"----------------------------------------------------------
+"  neosnippet-snippets
+"----------------------------------------------------------
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+" <C-k>で、TARGETのところへジャンプ
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
+" 独自スニペットファイルのあるディレクトリを指定
+let g:neosnippet#enable_snipmate_compatibility = 1
+let g:neosnippet#snippets_directory=$HOME.'/.vim/dein/vim-neosnippets/'
+
+" For conceal markers.
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
-"------------------------------------------------------
+"----------------------------------------------------------
+"  neocomplete.vim
+"----------------------------------------------------------
+"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" 辞書ファイルを設定
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : ''
+    \ }
+
+"辞書ファイル設定する場合は上記にこちら追加
+"    \ 'php' : $HOME.'/.vim/dein/dict/php.dict'
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 
-"----lightline(ステータスの表示の設定/色の変更とVimFiler時にパスが出るようにしてる)----
-let g:lightline = {
-        \ 'colorscheme': 'wombat',
-        \ 'mode_map': {'c': 'NORMAL'},
-        \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-        \ },
-        \ 'component_function': {
-        \   'modified': 'LightlineModified',
-        \   'readonly': 'LightlineReadonly',
-        \   'fugitive': 'LightlineFugitive',
-        \   'filename': 'LightlineFilename',
-        \   'fileformat': 'LightlineFileformat',
-        \   'filetype': 'LightlineFiletype',
-        \   'fileencoding': 'LightlineFileencoding',
-        \   'mode': 'LightlineMode'
-        \ }
-        \ }
-
-function! LightlineModified()
-  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
-function! LightlineReadonly()
-  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
-endfunction
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
 
-function! LightlineFilename()
-  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \  &ft == 'unite' ? unite#get_status_string() :
-        \  &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
-endfunction
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
-function! LightlineFugitive()
-  if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
-    return fugitive#head()
-  else
-    return ''
-  endif
-endfunction
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 
-function! LightlineFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-
-function! LightlineFiletype()
-  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
-endfunction
-
-function! LightlineFileencoding()
-  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
-endfunction
-
-function! LightlineMode()
-  return winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-"------------------------------------------------------
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 
 
-"--------------- ステータスラインの設定-------------------
-set laststatus=2 " ステータスラインを常に表示
-set showmode " 現在のモードを表示
-set showcmd " 打ったコマンドをステータスラインの下に表示
-"---------------------------------------------------------
+"----------------------------------------------------------
+"  vim-gitgutter
+"----------------------------------------------------------
+" 記号更新のタイミングを早くする
+set updatetime=250
+" ハイライトを有効にする
+"let g:gitgutter_highlight_lines = 1
 
 
+"----------------------------------------------------------
+"  プラグイン関連の微調整
+"----------------------------------------------------------
+" バックスペースが使用できなくなるときに使用
+"set backspace=indent,eol,start
 
-call neobundle#end()
-
-" Required:
-filetype plugin indent on
-
-" 未インストールのプラグインがある場合、vimrc起動時にインストール
-NeoBundleCheck
-"===========================================================
+"End dein Scripts-------------------------
+"
