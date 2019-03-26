@@ -19,6 +19,9 @@ set ambiwidth=double
 
 " ヤンクする行数上限を増やす
 set viminfo='20,\"1000
+
+" ステータスバーに文字コードを表示
+set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 "=====================================================
 
 
@@ -249,7 +252,6 @@ map <silent> [Tag]p :tabprevious<CR>
 
 
 "====================== dein ===========================
-<<<<<<< HEAD
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
@@ -287,7 +289,6 @@ if dein#load_state('$HOME/.vim/dein')
   call dein#end()
   call dein#save_state()
 endif
-=======
 if (v:version > 800)
  "dein Scripts-----------------------------
  if &compatible
@@ -335,7 +336,6 @@ if (v:version > 800)
  if dein#check_install()
    call dein#install()
  endif
->>>>>>> 7039cc4367da4f612d48aad6a4793785cba37343
 
 endif
 "----------------------------------------------------------
