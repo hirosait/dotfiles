@@ -257,39 +257,39 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-" Required:
-set runtimepath+=$HOME/.vim/dein/repos/github.com/Shougo/dein.vim
-
-" Required:
-if dein#load_state('$HOME/.vim/dein')
-  call dein#begin('$HOME/.vim/dein')
-
-  " Let dein manage dein
-  " Required:
-  call dein#add('$HOME/.vim/dein/repos/github.com/Shougo/dein.vim')
-
-  " プラグインを設定
-  " NerdTree
-  call dein#add('scrooloose/nerdtree')
-  " 閉じ括弧補完
-  call dein#add('cohama/lexima.vim')
-  " HTMLなど 閉じタグ自動補完
-  " call dein#add('alvan/vim-closetag')
-  " HTML 対応するタグをハイライト
-  " call dein#add('valloric/matchtagalways')
-  " コード補完
-  call dein#add('Shougo/neocomplete.vim')
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-  " Git関連
-  call dein#add('airblade/vim-gitgutter')
-  call dein#add('tpope/vim-fugitive')
-
-  " Required:
-  call dein#end()
-  call dein#save_state()
-endif
 if (v:version > 800)
+  " Required:
+  set runtimepath+=$HOME/.vim/dein/repos/github.com/Shougo/dein.vim
+  
+  " Required:
+  if dein#load_state('$HOME/.vim/dein')
+    call dein#begin('$HOME/.vim/dein')
+  
+    " Let dein manage dein
+    " Required:
+    call dein#add('$HOME/.vim/dein/repos/github.com/Shougo/dein.vim')
+  
+    " プラグインを設定
+    " NerdTree
+    call dein#add('scrooloose/nerdtree')
+    " 閉じ括弧補完
+    call dein#add('cohama/lexima.vim')
+    " HTMLなど 閉じタグ自動補完
+    " call dein#add('alvan/vim-closetag')
+    " HTML 対応するタグをハイライト
+    " call dein#add('valloric/matchtagalways')
+    " コード補完
+    call dein#add('Shougo/neocomplete.vim')
+    call dein#add('Shougo/neosnippet.vim')
+    call dein#add('Shougo/neosnippet-snippets')
+    " Git関連
+    call dein#add('airblade/vim-gitgutter')
+    call dein#add('tpope/vim-fugitive')
+  
+    " Required:
+    call dein#end()
+    call dein#save_state()
+  endif
  "dein Scripts-----------------------------
  if &compatible
    set nocompatible               " Be iMproved
