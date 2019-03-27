@@ -16,6 +16,12 @@ set fileformats=unix,dos,mac
 
 " □や○文字が崩れる問題を解決
 set ambiwidth=double
+
+" ヤンクする行数上限を増やす
+set viminfo='20,\"1000
+
+" ステータスバーに文字コードを表示
+set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 "=====================================================
 
 
@@ -246,6 +252,43 @@ map <silent> [Tag]p :tabprevious<CR>
 
 
 "====================== dein ===========================
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=$HOME/.vim/dein/repos/github.com/Shougo/dein.vim
+
+" Required:
+if dein#load_state('$HOME/.vim/dein')
+  call dein#begin('$HOME/.vim/dein')
+
+  " Let dein manage dein
+  " Required:
+  call dein#add('$HOME/.vim/dein/repos/github.com/Shougo/dein.vim')
+
+  " プラグインを設定
+  " NerdTree
+  call dein#add('scrooloose/nerdtree')
+  " 閉じ括弧補完
+  call dein#add('cohama/lexima.vim')
+  " HTMLなど 閉じタグ自動補完
+  " call dein#add('alvan/vim-closetag')
+  " HTML 対応するタグをハイライト
+  " call dein#add('valloric/matchtagalways')
+  " コード補完
+  call dein#add('Shougo/neocomplete.vim')
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  " Git関連
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('tpope/vim-fugitive')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
 if (v:version > 800)
  "dein Scripts-----------------------------
  if &compatible
@@ -462,6 +505,19 @@ if (v:version > 800)
   let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 endif
 
+
+" PHPLint 構文チェック　,lでチェック
+nmap ,l :call PHPLint()<CR>
+
+" " 
+"  PHPLint
+"  
+"  @author halt feits <halt.feits at gmail.com>
+"  
+function PHPLint()
+    let result = system( &ft . ' -l ' . bufname(""))
+    echo result
+endfunction
 
 "----------------------------------------------------------
 "  vim-gitgutter
