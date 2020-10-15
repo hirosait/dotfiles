@@ -8,6 +8,7 @@ export PATH=~/.local/bin:$PATH
 
 alias ll='ls -la'
 alias vi='vim'
+alias tailf='tailf -f'
 
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
